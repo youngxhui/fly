@@ -12,23 +12,23 @@
             </a>
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-            <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+            <li nz-submenu nzOpen nzTitle="控制台" nzIcon="dashboard">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="">Welcome</a>
+                        <a routerLink="">总览</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
-                        <a>Monitor</a>
+                        <a routerLink="real">实时监控</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
-                        <a>Workplace</a>
+                        <a>预警信息</a>
                     </li>
                 </ul>
             </li>
-            <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+            <li nz-submenu nzOpen nzTitle="系统管理" nzIcon="form">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
-                        <a>Basic Form</a>
+                        <a>人员管理</a>
                     </li>
                 </ul>
             </li>

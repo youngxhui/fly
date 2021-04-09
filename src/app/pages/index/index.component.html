@@ -1,1 +1,34 @@
-<p>index works!</p>
+<nz-alert nzType="error" nzMessage="编号为 No.001 的刀具已经磨损至无法使用，请立即更换！" nzShowIcon></nz-alert>
+
+<nz-alert nzType="warning" nzMessage="编号为 No.002 的刀具即将磨损至无法使用，请注意更换！" nzShowIcon style="margin-top: 2px;margin-bottom: 2px"></nz-alert>
+
+<nz-table #basicTable [nzData]="tools">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>设备编号</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.machineId }}</td>
+
+        <td *ngIf="data.status == 0">
+            <nz-tag nzColor="success"><i nz-icon nzType="check-circle"></i><span>健康</span></nz-tag>
+        </td>
+        <td *ngIf="data.status == 1">
+            <nz-tag nzColor="warning"><i nz-icon nzType="exclamation-circle"></i><span>即将损坏</span></nz-tag>
+        </td>
+        <td *ngIf="data.status == 2">
+            <nz-tag nzColor="error"><i nz-icon nzType="close-circle"></i><span>已经损坏</span></nz-tag>
+        </td>
+        <td>
+            <a>查看详情</a>
+
+        </td>
+    </tr>
+    </tbody>
+</nz-table>
