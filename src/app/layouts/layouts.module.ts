@@ -6,18 +6,23 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { LayoutsRoutingModule } from './layouts-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
         EmptyComponent,
         DefaultComponent
     ],
+    exports: [
+        EmptyComponent
+    ],
     imports: [
         CommonModule,
-        NzLayoutModule,
-        NzIconModule,
-        NzMenuModule,
-        LayoutsRoutingModule
+        SharedModule,
+        LayoutsRoutingModule,
+        ReactiveFormsModule
     ]
 })
 export class LayoutsModule {
