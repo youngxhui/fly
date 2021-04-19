@@ -10,8 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
+import { GrpcCoreModule } from '@ngx-grpc/core';
+import { GrpcWebClientModule } from '@ngx-grpc/grpc-web-client';
+import { environment } from '../environments/environment';
+import { GrpcMessage } from '@ngx-grpc/common';
 
 registerLocaleData(zh);
+
 
 @NgModule({
     declarations: [
@@ -24,6 +29,16 @@ registerLocaleData(zh);
         HttpClientModule,
         BrowserAnimationsModule,
         IconsProviderModule,
+        GrpcCoreModule.forRoot(),
+        GrpcWebClientModule.forRoot({
+            settings: {
+                host: 'http://127.0.0.1:8000',
+                // @ts-ignore
+                enabled: localStorage.getItem('logger') === 'true' || !environment.production,
+                requestMapper: (msg: GrpcMessage) => msg.toProtobufJSON(),
+                responseMapper: (msg: GrpcMessage) => msg.toProtobufJSON()
+            }
+        })
     ],
     providers: [{provide: NZ_I18N, useValue: zh_CN}],
     bootstrap: [AppComponent]

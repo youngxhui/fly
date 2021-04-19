@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Status, Tool } from '../../../proto/tool.pb';
 
+import { Result } from 'src/proto/base.pb';
+import { UserServiceClient } from '../../../proto/auth.pbsc';
+import { LoginUserRequest, LoginUserResponse, User } from '../../../proto/auth.pb';
+
 interface Person {
     key: string;
     name: string;
@@ -18,7 +22,17 @@ export class IndexComponent implements OnInit {
     tools: Tool[] = new Array<Tool>();
     status = [Status.Health, Status.Damage, Status.Waring];
 
-    constructor() {
+    constructor(private client: UserServiceClient) {
+    }
+
+    grpcTest(): void {
+        const request = new LoginUserRequest();
+        request.device = 'web';
+        request.password = '123';
+        request.username = '123';
+        this.client.loginUser(request).subscribe(
+            (response: LoginUserResponse) => console.log(response.toJSON())
+        );
     }
 
     ngOnInit(): void {

@@ -11,26 +11,20 @@ import {
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleApi000 from './google/api/http.pb';
 import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
-import * as googleApi003 from './google/api/annotations.pb';
-export enum Status {
-  Health = 0,
-  Waring = 1,
-  Damage = 2
-}
+import * as googleApi002 from './google/api/annotations.pb';
 /**
- * Message implementation for protos.ListToolsRequest
+ * Message implementation for protos.GetUserRequest
  */
-export class ListToolsRequest implements GrpcMessage {
-  static id = 'protos.ListToolsRequest';
+export class GetUserRequest implements GrpcMessage {
+  static id = 'protos.GetUserRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new ListToolsRequest();
-    ListToolsRequest.deserializeBinaryFromReader(
+    const instance = new GetUserRequest();
+    GetUserRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -41,351 +35,7 @@ export class ListToolsRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: ListToolsRequest) {
-    _instance.parent = _instance.parent || '';
-    _instance.pageSize = _instance.pageSize || 0;
-    _instance.pageToken = _instance.pageToken || '';
-  }
-
-  /**
-   * Deserializes / reads binary message into message instance using provided binary reader
-   * @param _instance message instance
-   * @param _reader binary reader instance
-   */
-  static deserializeBinaryFromReader(
-    _instance: ListToolsRequest,
-    _reader: BinaryReader
-  ) {
-    while (_reader.nextField()) {
-      if (_reader.isEndGroup()) break;
-
-      switch (_reader.getFieldNumber()) {
-        case 1:
-          _instance.parent = _reader.readString();
-          break;
-        case 2:
-          _instance.pageSize = _reader.readInt32();
-          break;
-        case 3:
-          _instance.pageToken = _reader.readString();
-          break;
-        default:
-          _reader.skipField();
-      }
-    }
-
-    ListToolsRequest.refineValues(_instance);
-  }
-
-  /**
-   * Serializes a message to binary format using provided binary reader
-   * @param _instance message instance
-   * @param _writer binary writer instance
-   */
-  static serializeBinaryToWriter(
-    _instance: ListToolsRequest,
-    _writer: BinaryWriter
-  ) {
-    if (_instance.parent) {
-      _writer.writeString(1, _instance.parent);
-    }
-    if (_instance.pageSize) {
-      _writer.writeInt32(2, _instance.pageSize);
-    }
-    if (_instance.pageToken) {
-      _writer.writeString(3, _instance.pageToken);
-    }
-  }
-
-  private _parent?: string;
-  private _pageSize?: number;
-  private _pageToken?: string;
-
-  /**
-   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of ListToolsRequest to deeply clone from
-   */
-  constructor(_value?: RecursivePartial<ListToolsRequest.AsObject>) {
-    _value = _value || {};
-    this.parent = _value.parent;
-    this.pageSize = _value.pageSize;
-    this.pageToken = _value.pageToken;
-    ListToolsRequest.refineValues(this);
-  }
-  get parent(): string | undefined {
-    return this._parent;
-  }
-  set parent(value: string | undefined) {
-    this._parent = value;
-  }
-  get pageSize(): number | undefined {
-    return this._pageSize;
-  }
-  set pageSize(value: number | undefined) {
-    this._pageSize = value;
-  }
-  get pageToken(): string | undefined {
-    return this._pageToken;
-  }
-  set pageToken(value: string | undefined) {
-    this._pageToken = value;
-  }
-
-  /**
-   * Serialize message to binary data
-   * @param instance message instance
-   */
-  serializeBinary() {
-    const writer = new BinaryWriter();
-    ListToolsRequest.serializeBinaryToWriter(this, writer);
-    return writer.getResultBuffer();
-  }
-
-  /**
-   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-   */
-  toObject(): ListToolsRequest.AsObject {
-    return {
-      parent: this.parent,
-      pageSize: this.pageSize,
-      pageToken: this.pageToken
-    };
-  }
-
-  /**
-   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-   */
-  toJSON() {
-    return this.toObject();
-  }
-
-  /**
-   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-   */
-  toProtobufJSON(
-    // @ts-ignore
-    options?: ToProtobufJSONOptions
-  ): ListToolsRequest.AsProtobufJSON {
-    return {
-      parent: this.parent,
-      pageSize: this.pageSize,
-      pageToken: this.pageToken
-    };
-  }
-}
-export module ListToolsRequest {
-  /**
-   * Standard JavaScript object representation for ListToolsRequest
-   */
-  export interface AsObject {
-    parent?: string;
-    pageSize?: number;
-    pageToken?: string;
-  }
-
-  /**
-   * Protobuf JSON representation for ListToolsRequest
-   */
-  export interface AsProtobufJSON {
-    parent?: string;
-    pageSize?: number;
-    pageToken?: string;
-  }
-}
-
-/**
- * Message implementation for protos.ListToolsResponse
- */
-export class ListToolsResponse implements GrpcMessage {
-  static id = 'protos.ListToolsResponse';
-
-  /**
-   * Deserialize binary data to message
-   * @param instance message instance
-   */
-  static deserializeBinary(bytes: ByteSource) {
-    const instance = new ListToolsResponse();
-    ListToolsResponse.deserializeBinaryFromReader(
-      instance,
-      new BinaryReader(bytes)
-    );
-    return instance;
-  }
-
-  /**
-   * Check all the properties and set default protobuf values if necessary
-   * @param _instance message instance
-   */
-  static refineValues(_instance: ListToolsResponse) {
-    _instance.tools = _instance.tools || [];
-    _instance.nextPageToken = _instance.nextPageToken || '';
-  }
-
-  /**
-   * Deserializes / reads binary message into message instance using provided binary reader
-   * @param _instance message instance
-   * @param _reader binary reader instance
-   */
-  static deserializeBinaryFromReader(
-    _instance: ListToolsResponse,
-    _reader: BinaryReader
-  ) {
-    while (_reader.nextField()) {
-      if (_reader.isEndGroup()) break;
-
-      switch (_reader.getFieldNumber()) {
-        case 1:
-          const messageInitializer1 = new Tool();
-          _reader.readMessage(
-            messageInitializer1,
-            Tool.deserializeBinaryFromReader
-          );
-          (_instance.tools = _instance.tools || []).push(messageInitializer1);
-          break;
-        case 2:
-          _instance.nextPageToken = _reader.readString();
-          break;
-        default:
-          _reader.skipField();
-      }
-    }
-
-    ListToolsResponse.refineValues(_instance);
-  }
-
-  /**
-   * Serializes a message to binary format using provided binary reader
-   * @param _instance message instance
-   * @param _writer binary writer instance
-   */
-  static serializeBinaryToWriter(
-    _instance: ListToolsResponse,
-    _writer: BinaryWriter
-  ) {
-    if (_instance.tools && _instance.tools.length) {
-      _writer.writeRepeatedMessage(
-        1,
-        _instance.tools as any,
-        Tool.serializeBinaryToWriter
-      );
-    }
-    if (_instance.nextPageToken) {
-      _writer.writeString(2, _instance.nextPageToken);
-    }
-  }
-
-  private _tools?: Tool[];
-  private _nextPageToken?: string;
-
-  /**
-   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of ListToolsResponse to deeply clone from
-   */
-  constructor(_value?: RecursivePartial<ListToolsResponse.AsObject>) {
-    _value = _value || {};
-    this.tools = (_value.tools || []).map(m => new Tool(m));
-    this.nextPageToken = _value.nextPageToken;
-    ListToolsResponse.refineValues(this);
-  }
-  get tools(): Tool[] | undefined {
-    return this._tools;
-  }
-  set tools(value: Tool[] | undefined) {
-    this._tools = value;
-  }
-  get nextPageToken(): string | undefined {
-    return this._nextPageToken;
-  }
-  set nextPageToken(value: string | undefined) {
-    this._nextPageToken = value;
-  }
-
-  /**
-   * Serialize message to binary data
-   * @param instance message instance
-   */
-  serializeBinary() {
-    const writer = new BinaryWriter();
-    ListToolsResponse.serializeBinaryToWriter(this, writer);
-    return writer.getResultBuffer();
-  }
-
-  /**
-   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-   */
-  toObject(): ListToolsResponse.AsObject {
-    return {
-      tools: (this.tools || []).map(m => m.toObject()),
-      nextPageToken: this.nextPageToken
-    };
-  }
-
-  /**
-   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-   */
-  toJSON() {
-    return this.toObject();
-  }
-
-  /**
-   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-   */
-  toProtobufJSON(
-    // @ts-ignore
-    options?: ToProtobufJSONOptions
-  ): ListToolsResponse.AsProtobufJSON {
-    return {
-      tools: (this.tools || []).map(m => m.toProtobufJSON(options)),
-      nextPageToken: this.nextPageToken
-    };
-  }
-}
-export module ListToolsResponse {
-  /**
-   * Standard JavaScript object representation for ListToolsResponse
-   */
-  export interface AsObject {
-    tools?: Tool.AsObject[];
-    nextPageToken?: string;
-  }
-
-  /**
-   * Protobuf JSON representation for ListToolsResponse
-   */
-  export interface AsProtobufJSON {
-    tools?: Tool.AsProtobufJSON[] | null;
-    nextPageToken?: string;
-  }
-}
-
-/**
- * Message implementation for protos.GetToolRequest
- */
-export class GetToolRequest implements GrpcMessage {
-  static id = 'protos.GetToolRequest';
-
-  /**
-   * Deserialize binary data to message
-   * @param instance message instance
-   */
-  static deserializeBinary(bytes: ByteSource) {
-    const instance = new GetToolRequest();
-    GetToolRequest.deserializeBinaryFromReader(
-      instance,
-      new BinaryReader(bytes)
-    );
-    return instance;
-  }
-
-  /**
-   * Check all the properties and set default protobuf values if necessary
-   * @param _instance message instance
-   */
-  static refineValues(_instance: GetToolRequest) {
+  static refineValues(_instance: GetUserRequest) {
     _instance.id = _instance.id || 0;
   }
 
@@ -395,7 +45,7 @@ export class GetToolRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: GetToolRequest,
+    _instance: GetUserRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -410,7 +60,7 @@ export class GetToolRequest implements GrpcMessage {
       }
     }
 
-    GetToolRequest.refineValues(_instance);
+    GetUserRequest.refineValues(_instance);
   }
 
   /**
@@ -419,7 +69,7 @@ export class GetToolRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: GetToolRequest,
+    _instance: GetUserRequest,
     _writer: BinaryWriter
   ) {
     if (_instance.id) {
@@ -431,12 +81,12 @@ export class GetToolRequest implements GrpcMessage {
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of GetToolRequest to deeply clone from
+   * @param _value initial values object or instance of GetUserRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<GetToolRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<GetUserRequest.AsObject>) {
     _value = _value || {};
     this.id = _value.id;
-    GetToolRequest.refineValues(this);
+    GetUserRequest.refineValues(this);
   }
   get id(): number | undefined {
     return this._id;
@@ -451,14 +101,14 @@ export class GetToolRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    GetToolRequest.serializeBinaryToWriter(this, writer);
+    GetUserRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): GetToolRequest.AsObject {
+  toObject(): GetUserRequest.AsObject {
     return {
       id: this.id
     };
@@ -479,22 +129,22 @@ export class GetToolRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): GetToolRequest.AsProtobufJSON {
+  ): GetUserRequest.AsProtobufJSON {
     return {
       id: this.id
     };
   }
 }
-export module GetToolRequest {
+export module GetUserRequest {
   /**
-   * Standard JavaScript object representation for GetToolRequest
+   * Standard JavaScript object representation for GetUserRequest
    */
   export interface AsObject {
     id?: number;
   }
 
   /**
-   * Protobuf JSON representation for GetToolRequest
+   * Protobuf JSON representation for GetUserRequest
    */
   export interface AsProtobufJSON {
     id?: number;
@@ -502,18 +152,18 @@ export module GetToolRequest {
 }
 
 /**
- * Message implementation for protos.CreateToolRequest
+ * Message implementation for protos.LoginUserRequest
  */
-export class CreateToolRequest implements GrpcMessage {
-  static id = 'protos.CreateToolRequest';
+export class LoginUserRequest implements GrpcMessage {
+  static id = 'protos.LoginUserRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new CreateToolRequest();
-    CreateToolRequest.deserializeBinaryFromReader(
+    const instance = new LoginUserRequest();
+    LoginUserRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -524,10 +174,11 @@ export class CreateToolRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: CreateToolRequest) {
-    _instance.parent = _instance.parent || '';
-    _instance.toolId = _instance.toolId || '';
-    _instance.tool = _instance.tool || undefined;
+  static refineValues(_instance: LoginUserRequest) {
+    _instance.username = _instance.username || '';
+    _instance.password = _instance.password || '';
+    _instance.device = _instance.device || '';
+    _instance.user = _instance.user || undefined;
   }
 
   /**
@@ -536,7 +187,7 @@ export class CreateToolRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: CreateToolRequest,
+    _instance: LoginUserRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -544,21 +195,24 @@ export class CreateToolRequest implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          _instance.parent = _reader.readString();
+          _instance.username = _reader.readString();
           break;
         case 2:
-          _instance.toolId = _reader.readString();
+          _instance.password = _reader.readString();
           break;
         case 3:
-          _instance.tool = new Tool();
-          _reader.readMessage(_instance.tool, Tool.deserializeBinaryFromReader);
+          _instance.device = _reader.readString();
+          break;
+        case 4:
+          _instance.user = new User();
+          _reader.readMessage(_instance.user, User.deserializeBinaryFromReader);
           break;
         default:
           _reader.skipField();
       }
     }
 
-    CreateToolRequest.refineValues(_instance);
+    LoginUserRequest.refineValues(_instance);
   }
 
   /**
@@ -567,56 +221,253 @@ export class CreateToolRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: CreateToolRequest,
+    _instance: LoginUserRequest,
     _writer: BinaryWriter
   ) {
-    if (_instance.parent) {
-      _writer.writeString(1, _instance.parent);
+    if (_instance.username) {
+      _writer.writeString(1, _instance.username);
     }
-    if (_instance.toolId) {
-      _writer.writeString(2, _instance.toolId);
+    if (_instance.password) {
+      _writer.writeString(2, _instance.password);
     }
-    if (_instance.tool) {
+    if (_instance.device) {
+      _writer.writeString(3, _instance.device);
+    }
+    if (_instance.user) {
+      _writer.writeMessage(
+        4,
+        _instance.user as any,
+        User.serializeBinaryToWriter
+      );
+    }
+  }
+
+  private _username?: string;
+  private _password?: string;
+  private _device?: string;
+  private _user?: User;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LoginUserRequest to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LoginUserRequest.AsObject>) {
+    _value = _value || {};
+    this.username = _value.username;
+    this.password = _value.password;
+    this.device = _value.device;
+    this.user = _value.user ? new User(_value.user) : undefined;
+    LoginUserRequest.refineValues(this);
+  }
+  get username(): string | undefined {
+    return this._username;
+  }
+  set username(value: string | undefined) {
+    this._username = value;
+  }
+  get password(): string | undefined {
+    return this._password;
+  }
+  set password(value: string | undefined) {
+    this._password = value;
+  }
+  get device(): string | undefined {
+    return this._device;
+  }
+  set device(value: string | undefined) {
+    this._device = value;
+  }
+  get user(): User | undefined {
+    return this._user;
+  }
+  set user(value: User | undefined) {
+    this._user = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LoginUserRequest.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LoginUserRequest.AsObject {
+    return {
+      username: this.username,
+      password: this.password,
+      device: this.device,
+      user: this.user ? this.user.toObject() : undefined
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LoginUserRequest.AsProtobufJSON {
+    return {
+      username: this.username,
+      password: this.password,
+      device: this.device,
+      user: this.user ? this.user.toProtobufJSON(options) : null
+    };
+  }
+}
+export module LoginUserRequest {
+  /**
+   * Standard JavaScript object representation for LoginUserRequest
+   */
+  export interface AsObject {
+    username?: string;
+    password?: string;
+    device?: string;
+    user?: User.AsObject;
+  }
+
+  /**
+   * Protobuf JSON representation for LoginUserRequest
+   */
+  export interface AsProtobufJSON {
+    username?: string;
+    password?: string;
+    device?: string;
+    user?: User.AsProtobufJSON | null;
+  }
+}
+
+/**
+ * Message implementation for protos.RegisterUserRequest
+ */
+export class RegisterUserRequest implements GrpcMessage {
+  static id = 'protos.RegisterUserRequest';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new RegisterUserRequest();
+    RegisterUserRequest.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: RegisterUserRequest) {
+    _instance.username = _instance.username || '';
+    _instance.password = _instance.password || '';
+    _instance.user = _instance.user || undefined;
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: RegisterUserRequest,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.username = _reader.readString();
+          break;
+        case 2:
+          _instance.password = _reader.readString();
+          break;
+        case 3:
+          _instance.user = new User();
+          _reader.readMessage(_instance.user, User.deserializeBinaryFromReader);
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    RegisterUserRequest.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: RegisterUserRequest,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.username) {
+      _writer.writeString(1, _instance.username);
+    }
+    if (_instance.password) {
+      _writer.writeString(2, _instance.password);
+    }
+    if (_instance.user) {
       _writer.writeMessage(
         3,
-        _instance.tool as any,
-        Tool.serializeBinaryToWriter
+        _instance.user as any,
+        User.serializeBinaryToWriter
       );
     }
   }
 
-  private _parent?: string;
-  private _toolId?: string;
-  private _tool?: Tool;
+  private _username?: string;
+  private _password?: string;
+  private _user?: User;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of CreateToolRequest to deeply clone from
+   * @param _value initial values object or instance of RegisterUserRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<CreateToolRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<RegisterUserRequest.AsObject>) {
     _value = _value || {};
-    this.parent = _value.parent;
-    this.toolId = _value.toolId;
-    this.tool = _value.tool ? new Tool(_value.tool) : undefined;
-    CreateToolRequest.refineValues(this);
+    this.username = _value.username;
+    this.password = _value.password;
+    this.user = _value.user ? new User(_value.user) : undefined;
+    RegisterUserRequest.refineValues(this);
   }
-  get parent(): string | undefined {
-    return this._parent;
+  get username(): string | undefined {
+    return this._username;
   }
-  set parent(value: string | undefined) {
-    this._parent = value;
+  set username(value: string | undefined) {
+    this._username = value;
   }
-  get toolId(): string | undefined {
-    return this._toolId;
+  get password(): string | undefined {
+    return this._password;
   }
-  set toolId(value: string | undefined) {
-    this._toolId = value;
+  set password(value: string | undefined) {
+    this._password = value;
   }
-  get tool(): Tool | undefined {
-    return this._tool;
+  get user(): User | undefined {
+    return this._user;
   }
-  set tool(value: Tool | undefined) {
-    this._tool = value;
+  set user(value: User | undefined) {
+    this._user = value;
   }
 
   /**
@@ -625,18 +476,18 @@ export class CreateToolRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    CreateToolRequest.serializeBinaryToWriter(this, writer);
+    RegisterUserRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): CreateToolRequest.AsObject {
+  toObject(): RegisterUserRequest.AsObject {
     return {
-      parent: this.parent,
-      toolId: this.toolId,
-      tool: this.tool ? this.tool.toObject() : undefined
+      username: this.username,
+      password: this.password,
+      user: this.user ? this.user.toObject() : undefined
     };
   }
 
@@ -655,47 +506,47 @@ export class CreateToolRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): CreateToolRequest.AsProtobufJSON {
+  ): RegisterUserRequest.AsProtobufJSON {
     return {
-      parent: this.parent,
-      toolId: this.toolId,
-      tool: this.tool ? this.tool.toProtobufJSON(options) : null
+      username: this.username,
+      password: this.password,
+      user: this.user ? this.user.toProtobufJSON(options) : null
     };
   }
 }
-export module CreateToolRequest {
+export module RegisterUserRequest {
   /**
-   * Standard JavaScript object representation for CreateToolRequest
+   * Standard JavaScript object representation for RegisterUserRequest
    */
   export interface AsObject {
-    parent?: string;
-    toolId?: string;
-    tool?: Tool.AsObject;
+    username?: string;
+    password?: string;
+    user?: User.AsObject;
   }
 
   /**
-   * Protobuf JSON representation for CreateToolRequest
+   * Protobuf JSON representation for RegisterUserRequest
    */
   export interface AsProtobufJSON {
-    parent?: string;
-    toolId?: string;
-    tool?: Tool.AsProtobufJSON | null;
+    username?: string;
+    password?: string;
+    user?: User.AsProtobufJSON | null;
   }
 }
 
 /**
- * Message implementation for protos.UpdateToolRequest
+ * Message implementation for protos.DeleteUserRequest
  */
-export class UpdateToolRequest implements GrpcMessage {
-  static id = 'protos.UpdateToolRequest';
+export class DeleteUserRequest implements GrpcMessage {
+  static id = 'protos.DeleteUserRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new UpdateToolRequest();
-    UpdateToolRequest.deserializeBinaryFromReader(
+    const instance = new DeleteUserRequest();
+    DeleteUserRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -706,151 +557,7 @@ export class UpdateToolRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: UpdateToolRequest) {
-    _instance.tool = _instance.tool || undefined;
-  }
-
-  /**
-   * Deserializes / reads binary message into message instance using provided binary reader
-   * @param _instance message instance
-   * @param _reader binary reader instance
-   */
-  static deserializeBinaryFromReader(
-    _instance: UpdateToolRequest,
-    _reader: BinaryReader
-  ) {
-    while (_reader.nextField()) {
-      if (_reader.isEndGroup()) break;
-
-      switch (_reader.getFieldNumber()) {
-        case 1:
-          _instance.tool = new Tool();
-          _reader.readMessage(_instance.tool, Tool.deserializeBinaryFromReader);
-          break;
-        default:
-          _reader.skipField();
-      }
-    }
-
-    UpdateToolRequest.refineValues(_instance);
-  }
-
-  /**
-   * Serializes a message to binary format using provided binary reader
-   * @param _instance message instance
-   * @param _writer binary writer instance
-   */
-  static serializeBinaryToWriter(
-    _instance: UpdateToolRequest,
-    _writer: BinaryWriter
-  ) {
-    if (_instance.tool) {
-      _writer.writeMessage(
-        1,
-        _instance.tool as any,
-        Tool.serializeBinaryToWriter
-      );
-    }
-  }
-
-  private _tool?: Tool;
-
-  /**
-   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of UpdateToolRequest to deeply clone from
-   */
-  constructor(_value?: RecursivePartial<UpdateToolRequest.AsObject>) {
-    _value = _value || {};
-    this.tool = _value.tool ? new Tool(_value.tool) : undefined;
-    UpdateToolRequest.refineValues(this);
-  }
-  get tool(): Tool | undefined {
-    return this._tool;
-  }
-  set tool(value: Tool | undefined) {
-    this._tool = value;
-  }
-
-  /**
-   * Serialize message to binary data
-   * @param instance message instance
-   */
-  serializeBinary() {
-    const writer = new BinaryWriter();
-    UpdateToolRequest.serializeBinaryToWriter(this, writer);
-    return writer.getResultBuffer();
-  }
-
-  /**
-   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
-   */
-  toObject(): UpdateToolRequest.AsObject {
-    return {
-      tool: this.tool ? this.tool.toObject() : undefined
-    };
-  }
-
-  /**
-   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
-   */
-  toJSON() {
-    return this.toObject();
-  }
-
-  /**
-   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
-   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
-   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
-   */
-  toProtobufJSON(
-    // @ts-ignore
-    options?: ToProtobufJSONOptions
-  ): UpdateToolRequest.AsProtobufJSON {
-    return {
-      tool: this.tool ? this.tool.toProtobufJSON(options) : null
-    };
-  }
-}
-export module UpdateToolRequest {
-  /**
-   * Standard JavaScript object representation for UpdateToolRequest
-   */
-  export interface AsObject {
-    tool?: Tool.AsObject;
-  }
-
-  /**
-   * Protobuf JSON representation for UpdateToolRequest
-   */
-  export interface AsProtobufJSON {
-    tool?: Tool.AsProtobufJSON | null;
-  }
-}
-
-/**
- * Message implementation for protos.DeleteToolRequest
- */
-export class DeleteToolRequest implements GrpcMessage {
-  static id = 'protos.DeleteToolRequest';
-
-  /**
-   * Deserialize binary data to message
-   * @param instance message instance
-   */
-  static deserializeBinary(bytes: ByteSource) {
-    const instance = new DeleteToolRequest();
-    DeleteToolRequest.deserializeBinaryFromReader(
-      instance,
-      new BinaryReader(bytes)
-    );
-    return instance;
-  }
-
-  /**
-   * Check all the properties and set default protobuf values if necessary
-   * @param _instance message instance
-   */
-  static refineValues(_instance: DeleteToolRequest) {
+  static refineValues(_instance: DeleteUserRequest) {
     _instance.id = _instance.id || 0;
   }
 
@@ -860,7 +567,7 @@ export class DeleteToolRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: DeleteToolRequest,
+    _instance: DeleteUserRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -875,7 +582,7 @@ export class DeleteToolRequest implements GrpcMessage {
       }
     }
 
-    DeleteToolRequest.refineValues(_instance);
+    DeleteUserRequest.refineValues(_instance);
   }
 
   /**
@@ -884,7 +591,7 @@ export class DeleteToolRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: DeleteToolRequest,
+    _instance: DeleteUserRequest,
     _writer: BinaryWriter
   ) {
     if (_instance.id) {
@@ -896,12 +603,12 @@ export class DeleteToolRequest implements GrpcMessage {
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of DeleteToolRequest to deeply clone from
+   * @param _value initial values object or instance of DeleteUserRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<DeleteToolRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<DeleteUserRequest.AsObject>) {
     _value = _value || {};
     this.id = _value.id;
-    DeleteToolRequest.refineValues(this);
+    DeleteUserRequest.refineValues(this);
   }
   get id(): number | undefined {
     return this._id;
@@ -916,14 +623,14 @@ export class DeleteToolRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    DeleteToolRequest.serializeBinaryToWriter(this, writer);
+    DeleteUserRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): DeleteToolRequest.AsObject {
+  toObject(): DeleteUserRequest.AsObject {
     return {
       id: this.id
     };
@@ -944,22 +651,22 @@ export class DeleteToolRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): DeleteToolRequest.AsProtobufJSON {
+  ): DeleteUserRequest.AsProtobufJSON {
     return {
       id: this.id
     };
   }
 }
-export module DeleteToolRequest {
+export module DeleteUserRequest {
   /**
-   * Standard JavaScript object representation for DeleteToolRequest
+   * Standard JavaScript object representation for DeleteUserRequest
    */
   export interface AsObject {
     id?: number;
   }
 
   /**
-   * Protobuf JSON representation for DeleteToolRequest
+   * Protobuf JSON representation for DeleteUserRequest
    */
   export interface AsProtobufJSON {
     id?: number;
@@ -967,18 +674,18 @@ export module DeleteToolRequest {
 }
 
 /**
- * Message implementation for protos.Tool
+ * Message implementation for protos.User
  */
-export class Tool implements GrpcMessage {
-  static id = 'protos.Tool';
+export class User implements GrpcMessage {
+  static id = 'protos.User';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new Tool();
-    Tool.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+    const instance = new User();
+    User.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
     return instance;
   }
 
@@ -986,10 +693,11 @@ export class Tool implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: Tool) {
+  static refineValues(_instance: User) {
     _instance.id = _instance.id || 0;
-    _instance.machineId = _instance.machineId || 0;
-    _instance.status = _instance.status || 0;
+    _instance.username = _instance.username || '';
+    _instance.password = _instance.password || '';
+    _instance.device = _instance.device || '';
   }
 
   /**
@@ -997,26 +705,29 @@ export class Tool implements GrpcMessage {
    * @param _instance message instance
    * @param _reader binary reader instance
    */
-  static deserializeBinaryFromReader(_instance: Tool, _reader: BinaryReader) {
+  static deserializeBinaryFromReader(_instance: User, _reader: BinaryReader) {
     while (_reader.nextField()) {
       if (_reader.isEndGroup()) break;
 
       switch (_reader.getFieldNumber()) {
-        case 1:
+        case 4:
           _instance.id = _reader.readInt32();
+          break;
+        case 1:
+          _instance.username = _reader.readString();
           break;
         case 2:
-          _instance.machineId = _reader.readInt32();
+          _instance.password = _reader.readString();
           break;
         case 3:
-          _instance.status = _reader.readEnum();
+          _instance.device = _reader.readString();
           break;
         default:
           _reader.skipField();
       }
     }
 
-    Tool.refineValues(_instance);
+    User.refineValues(_instance);
   }
 
   /**
@@ -1024,32 +735,37 @@ export class Tool implements GrpcMessage {
    * @param _instance message instance
    * @param _writer binary writer instance
    */
-  static serializeBinaryToWriter(_instance: Tool, _writer: BinaryWriter) {
+  static serializeBinaryToWriter(_instance: User, _writer: BinaryWriter) {
     if (_instance.id) {
-      _writer.writeInt32(1, _instance.id);
+      _writer.writeInt32(4, _instance.id);
     }
-    if (_instance.machineId) {
-      _writer.writeInt32(2, _instance.machineId);
+    if (_instance.username) {
+      _writer.writeString(1, _instance.username);
     }
-    if (_instance.status) {
-      _writer.writeEnum(3, _instance.status);
+    if (_instance.password) {
+      _writer.writeString(2, _instance.password);
+    }
+    if (_instance.device) {
+      _writer.writeString(3, _instance.device);
     }
   }
 
   private _id?: number;
-  private _machineId?: number;
-  private _status?: Status;
+  private _username?: string;
+  private _password?: string;
+  private _device?: string;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of Tool to deeply clone from
+   * @param _value initial values object or instance of User to deeply clone from
    */
-  constructor(_value?: RecursivePartial<Tool.AsObject>) {
+  constructor(_value?: RecursivePartial<User.AsObject>) {
     _value = _value || {};
     this.id = _value.id;
-    this.machineId = _value.machineId;
-    this.status = _value.status;
-    Tool.refineValues(this);
+    this.username = _value.username;
+    this.password = _value.password;
+    this.device = _value.device;
+    User.refineValues(this);
   }
   get id(): number | undefined {
     return this._id;
@@ -1057,17 +773,23 @@ export class Tool implements GrpcMessage {
   set id(value: number | undefined) {
     this._id = value;
   }
-  get machineId(): number | undefined {
-    return this._machineId;
+  get username(): string | undefined {
+    return this._username;
   }
-  set machineId(value: number | undefined) {
-    this._machineId = value;
+  set username(value: string | undefined) {
+    this._username = value;
   }
-  get status(): Status | undefined {
-    return this._status;
+  get password(): string | undefined {
+    return this._password;
   }
-  set status(value: Status | undefined) {
-    this._status = value;
+  set password(value: string | undefined) {
+    this._password = value;
+  }
+  get device(): string | undefined {
+    return this._device;
+  }
+  set device(value: string | undefined) {
+    this._device = value;
   }
 
   /**
@@ -1076,18 +798,19 @@ export class Tool implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    Tool.serializeBinaryToWriter(this, writer);
+    User.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): Tool.AsObject {
+  toObject(): User.AsObject {
     return {
       id: this.id,
-      machineId: this.machineId,
-      status: this.status
+      username: this.username,
+      password: this.password,
+      device: this.device
     };
   }
 
@@ -1106,30 +829,330 @@ export class Tool implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): Tool.AsProtobufJSON {
+  ): User.AsProtobufJSON {
     return {
       id: this.id,
-      machineId: this.machineId,
-      status: Status[this.status ?? 0]
+      username: this.username,
+      password: this.password,
+      device: this.device
     };
   }
 }
-export module Tool {
+export module User {
   /**
-   * Standard JavaScript object representation for Tool
+   * Standard JavaScript object representation for User
    */
   export interface AsObject {
     id?: number;
-    machineId?: number;
-    status?: Status;
+    username?: string;
+    password?: string;
+    device?: string;
   }
 
   /**
-   * Protobuf JSON representation for Tool
+   * Protobuf JSON representation for User
    */
   export interface AsProtobufJSON {
     id?: number;
-    machineId?: number;
-    status?: string;
+    username?: string;
+    password?: string;
+    device?: string;
+  }
+}
+
+/**
+ * Message implementation for protos.LoginOffResponse
+ */
+export class LoginOffResponse implements GrpcMessage {
+  static id = 'protos.LoginOffResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LoginOffResponse();
+    LoginOffResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LoginOffResponse) {
+    _instance.message = _instance.message || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LoginOffResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.message = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LoginOffResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LoginOffResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.message) {
+      _writer.writeString(1, _instance.message);
+    }
+  }
+
+  private _message?: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LoginOffResponse to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LoginOffResponse.AsObject>) {
+    _value = _value || {};
+    this.message = _value.message;
+    LoginOffResponse.refineValues(this);
+  }
+  get message(): string | undefined {
+    return this._message;
+  }
+  set message(value: string | undefined) {
+    this._message = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LoginOffResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LoginOffResponse.AsObject {
+    return {
+      message: this.message
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LoginOffResponse.AsProtobufJSON {
+    return {
+      message: this.message
+    };
+  }
+}
+export module LoginOffResponse {
+  /**
+   * Standard JavaScript object representation for LoginOffResponse
+   */
+  export interface AsObject {
+    message?: string;
+  }
+
+  /**
+   * Protobuf JSON representation for LoginOffResponse
+   */
+  export interface AsProtobufJSON {
+    message?: string;
+  }
+}
+
+/**
+ * Message implementation for protos.LoginUserResponse
+ */
+export class LoginUserResponse implements GrpcMessage {
+  static id = 'protos.LoginUserResponse';
+
+  /**
+   * Deserialize binary data to message
+   * @param instance message instance
+   */
+  static deserializeBinary(bytes: ByteSource) {
+    const instance = new LoginUserResponse();
+    LoginUserResponse.deserializeBinaryFromReader(
+      instance,
+      new BinaryReader(bytes)
+    );
+    return instance;
+  }
+
+  /**
+   * Check all the properties and set default protobuf values if necessary
+   * @param _instance message instance
+   */
+  static refineValues(_instance: LoginUserResponse) {
+    _instance.token = _instance.token || '';
+    _instance.header = _instance.header || '';
+  }
+
+  /**
+   * Deserializes / reads binary message into message instance using provided binary reader
+   * @param _instance message instance
+   * @param _reader binary reader instance
+   */
+  static deserializeBinaryFromReader(
+    _instance: LoginUserResponse,
+    _reader: BinaryReader
+  ) {
+    while (_reader.nextField()) {
+      if (_reader.isEndGroup()) break;
+
+      switch (_reader.getFieldNumber()) {
+        case 1:
+          _instance.token = _reader.readString();
+          break;
+        case 2:
+          _instance.header = _reader.readString();
+          break;
+        default:
+          _reader.skipField();
+      }
+    }
+
+    LoginUserResponse.refineValues(_instance);
+  }
+
+  /**
+   * Serializes a message to binary format using provided binary reader
+   * @param _instance message instance
+   * @param _writer binary writer instance
+   */
+  static serializeBinaryToWriter(
+    _instance: LoginUserResponse,
+    _writer: BinaryWriter
+  ) {
+    if (_instance.token) {
+      _writer.writeString(1, _instance.token);
+    }
+    if (_instance.header) {
+      _writer.writeString(2, _instance.header);
+    }
+  }
+
+  private _token?: string;
+  private _header?: string;
+
+  /**
+   * Message constructor. Initializes the properties and applies default Protobuf values if necessary
+   * @param _value initial values object or instance of LoginUserResponse to deeply clone from
+   */
+  constructor(_value?: RecursivePartial<LoginUserResponse.AsObject>) {
+    _value = _value || {};
+    this.token = _value.token;
+    this.header = _value.header;
+    LoginUserResponse.refineValues(this);
+  }
+  get token(): string | undefined {
+    return this._token;
+  }
+  set token(value: string | undefined) {
+    this._token = value;
+  }
+  get header(): string | undefined {
+    return this._header;
+  }
+  set header(value: string | undefined) {
+    this._header = value;
+  }
+
+  /**
+   * Serialize message to binary data
+   * @param instance message instance
+   */
+  serializeBinary() {
+    const writer = new BinaryWriter();
+    LoginUserResponse.serializeBinaryToWriter(this, writer);
+    return writer.getResultBuffer();
+  }
+
+  /**
+   * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
+   */
+  toObject(): LoginUserResponse.AsObject {
+    return {
+      token: this.token,
+      header: this.header
+    };
+  }
+
+  /**
+   * Convenience method to support JSON.stringify(message), replicates the structure of toObject()
+   */
+  toJSON() {
+    return this.toObject();
+  }
+
+  /**
+   * Cast message to JSON using protobuf JSON notation: https://developers.google.com/protocol-buffers/docs/proto3#json
+   * Attention: output differs from toObject() e.g. enums are represented as names and not as numbers, Timestamp is an ISO Date string format etc.
+   * If the message itself or some of descendant messages is google.protobuf.Any, you MUST provide a message pool as options. If not, the messagePool is not required
+   */
+  toProtobufJSON(
+    // @ts-ignore
+    options?: ToProtobufJSONOptions
+  ): LoginUserResponse.AsProtobufJSON {
+    return {
+      token: this.token,
+      header: this.header
+    };
+  }
+}
+export module LoginUserResponse {
+  /**
+   * Standard JavaScript object representation for LoginUserResponse
+   */
+  export interface AsObject {
+    token?: string;
+    header?: string;
+  }
+
+  /**
+   * Protobuf JSON representation for LoginUserResponse
+   */
+  export interface AsProtobufJSON {
+    token?: string;
+    header?: string;
   }
 }
