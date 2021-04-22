@@ -42,9 +42,8 @@ export class ListToolsRequest implements GrpcMessage {
    * @param _instance message instance
    */
   static refineValues(_instance: ListToolsRequest) {
-    _instance.parent = _instance.parent || '';
-    _instance.pageSize = _instance.pageSize || 0;
-    _instance.pageToken = _instance.pageToken || '';
+    _instance.page = _instance.page || 0;
+    _instance.size = _instance.size || 0;
   }
 
   /**
@@ -61,13 +60,10 @@ export class ListToolsRequest implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          _instance.parent = _reader.readString();
+          _instance.page = _reader.readInt32();
           break;
         case 2:
-          _instance.pageSize = _reader.readInt32();
-          break;
-        case 3:
-          _instance.pageToken = _reader.readString();
+          _instance.size = _reader.readInt32();
           break;
         default:
           _reader.skipField();
@@ -86,20 +82,16 @@ export class ListToolsRequest implements GrpcMessage {
     _instance: ListToolsRequest,
     _writer: BinaryWriter
   ) {
-    if (_instance.parent) {
-      _writer.writeString(1, _instance.parent);
+    if (_instance.page) {
+      _writer.writeInt32(1, _instance.page);
     }
-    if (_instance.pageSize) {
-      _writer.writeInt32(2, _instance.pageSize);
-    }
-    if (_instance.pageToken) {
-      _writer.writeString(3, _instance.pageToken);
+    if (_instance.size) {
+      _writer.writeInt32(2, _instance.size);
     }
   }
 
-  private _parent?: string;
-  private _pageSize?: number;
-  private _pageToken?: string;
+  private _page?: number;
+  private _size?: number;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
@@ -107,28 +99,21 @@ export class ListToolsRequest implements GrpcMessage {
    */
   constructor(_value?: RecursivePartial<ListToolsRequest.AsObject>) {
     _value = _value || {};
-    this.parent = _value.parent;
-    this.pageSize = _value.pageSize;
-    this.pageToken = _value.pageToken;
+    this.page = _value.page;
+    this.size = _value.size;
     ListToolsRequest.refineValues(this);
   }
-  get parent(): string | undefined {
-    return this._parent;
+  get page(): number | undefined {
+    return this._page;
   }
-  set parent(value: string | undefined) {
-    this._parent = value;
+  set page(value: number | undefined) {
+    this._page = value;
   }
-  get pageSize(): number | undefined {
-    return this._pageSize;
+  get size(): number | undefined {
+    return this._size;
   }
-  set pageSize(value: number | undefined) {
-    this._pageSize = value;
-  }
-  get pageToken(): string | undefined {
-    return this._pageToken;
-  }
-  set pageToken(value: string | undefined) {
-    this._pageToken = value;
+  set size(value: number | undefined) {
+    this._size = value;
   }
 
   /**
@@ -146,9 +131,8 @@ export class ListToolsRequest implements GrpcMessage {
    */
   toObject(): ListToolsRequest.AsObject {
     return {
-      parent: this.parent,
-      pageSize: this.pageSize,
-      pageToken: this.pageToken
+      page: this.page,
+      size: this.size
     };
   }
 
@@ -169,9 +153,8 @@ export class ListToolsRequest implements GrpcMessage {
     options?: ToProtobufJSONOptions
   ): ListToolsRequest.AsProtobufJSON {
     return {
-      parent: this.parent,
-      pageSize: this.pageSize,
-      pageToken: this.pageToken
+      page: this.page,
+      size: this.size
     };
   }
 }
@@ -180,18 +163,16 @@ export module ListToolsRequest {
    * Standard JavaScript object representation for ListToolsRequest
    */
   export interface AsObject {
-    parent?: string;
-    pageSize?: number;
-    pageToken?: string;
+    page?: number;
+    size?: number;
   }
 
   /**
    * Protobuf JSON representation for ListToolsRequest
    */
   export interface AsProtobufJSON {
-    parent?: string;
-    pageSize?: number;
-    pageToken?: string;
+    page?: number;
+    size?: number;
   }
 }
 
