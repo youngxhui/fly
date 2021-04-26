@@ -1,0 +1,26 @@
+<h1>人员管理</h1>
+
+<button nz-button nzType="primary">添加新用户</button>
+
+<nz-table #basicTable [nzData]="peopleList">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>名字</th>
+        <th>密码</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+        <td>{{data.id}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.password}}</td>
+        <td>
+            <a>查看详情</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>删除</a>
+        </td>
+    </tr>
+    </tbody>
+</nz-table>

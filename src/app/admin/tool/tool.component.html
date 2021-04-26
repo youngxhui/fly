@@ -1,0 +1,31 @@
+<h1>刀具管理</h1>
+<nz-table #basicTable [nzData]="tools">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>设备编号</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.id }}</td>
+        <td>{{ data.machineId }}</td>
+
+        <td *ngIf="data.status == 0">
+            <nz-tag nzColor="success"><i nz-icon nzType="check-circle"></i><span>健康</span></nz-tag>
+        </td>
+        <td *ngIf="data.status == 1">
+            <nz-tag nzColor="warning"><i nz-icon nzType="exclamation-circle"></i><span>即将损坏</span></nz-tag>
+        </td>
+        <td *ngIf="data.status == 2">
+            <nz-tag nzColor="error"><i nz-icon nzType="close-circle"></i><span>已经损坏</span></nz-tag>
+        </td>
+        <td>
+            <a [routerLink]="'/detail/'+data.id">查看详情</a>
+        </td>
+
+    </tr>
+    </tbody>
+</nz-table>

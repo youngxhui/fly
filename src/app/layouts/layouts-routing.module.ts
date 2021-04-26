@@ -7,7 +7,8 @@ import { EmptyComponent } from './empty/empty.component';
 const routes: Routes = [
     {
         path: '', component: DefaultComponent, children: [
-            {path: '', loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)}
+            {path: '', loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)},
+            {path: 'admin', loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)}
         ]
     },
     {path: 'login', component: EmptyComponent}

@@ -15,7 +15,7 @@
             <li nz-submenu nzOpen nzTitle="控制台" nzIcon="dashboard">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
-                        <a routerLink="">总览</a>
+                        <a routerLink="index">总览</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
                         <a routerLink="real">实时监控</a>
@@ -28,7 +28,10 @@
             <li nz-submenu nzOpen nzTitle="系统管理" nzIcon="form">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
-                        <a>人员管理</a>
+                        <a routerLink="admin/people">人员管理</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="admin/tool">刀具管理</a>
                     </li>
                 </ul>
             </li>
@@ -48,6 +51,7 @@
         <nz-content>
             <div class="inner-content">
                 <router-outlet></router-outlet>
+                <nz-back-top></nz-back-top>
             </div>
         </nz-content>
     </nz-layout>

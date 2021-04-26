@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~11.2.9",
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
+    "@angular/service-worker": "~11.2.9",
     "@improbable-eng/grpc-web": "^0.14.0",
     "@ngx-grpc/common": "^2.0.4",
     "@ngx-grpc/core": "^2.0.4",
