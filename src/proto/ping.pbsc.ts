@@ -19,9 +19,6 @@ import {
 } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './ping.pb';
-import * as googleApi000 from './google/api/http.pb';
-import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as googleApi002 from './google/api/annotations.pb';
 import { GRPC_PING_CLIENT_SETTINGS } from './ping.pbconf';
 /**
  * Service client implementation for protos.Ping

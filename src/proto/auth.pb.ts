@@ -9,9 +9,7 @@ import {
   ToProtobufJSONOptions
 } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as googleApi000 from './google/api/http.pb';
-import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as googleApi002 from './google/api/annotations.pb';
+
 /**
  * Message implementation for protos.GetUserRequest
  */
@@ -175,9 +173,6 @@ export class LoginUserRequest implements GrpcMessage {
    * @param _instance message instance
    */
   static refineValues(_instance: LoginUserRequest) {
-    _instance.username = _instance.username || '';
-    _instance.password = _instance.password || '';
-    _instance.device = _instance.device || '';
     _instance.user = _instance.user || undefined;
   }
 
@@ -194,15 +189,6 @@ export class LoginUserRequest implements GrpcMessage {
       if (_reader.isEndGroup()) break;
 
       switch (_reader.getFieldNumber()) {
-        case 1:
-          _instance.username = _reader.readString();
-          break;
-        case 2:
-          _instance.password = _reader.readString();
-          break;
-        case 3:
-          _instance.device = _reader.readString();
-          break;
         case 4:
           _instance.user = new User();
           _reader.readMessage(_instance.user, User.deserializeBinaryFromReader);
@@ -224,15 +210,6 @@ export class LoginUserRequest implements GrpcMessage {
     _instance: LoginUserRequest,
     _writer: BinaryWriter
   ) {
-    if (_instance.username) {
-      _writer.writeString(1, _instance.username);
-    }
-    if (_instance.password) {
-      _writer.writeString(2, _instance.password);
-    }
-    if (_instance.device) {
-      _writer.writeString(3, _instance.device);
-    }
     if (_instance.user) {
       _writer.writeMessage(
         4,
@@ -242,9 +219,6 @@ export class LoginUserRequest implements GrpcMessage {
     }
   }
 
-  private _username?: string;
-  private _password?: string;
-  private _device?: string;
   private _user?: User;
 
   /**
@@ -253,29 +227,8 @@ export class LoginUserRequest implements GrpcMessage {
    */
   constructor(_value?: RecursivePartial<LoginUserRequest.AsObject>) {
     _value = _value || {};
-    this.username = _value.username;
-    this.password = _value.password;
-    this.device = _value.device;
     this.user = _value.user ? new User(_value.user) : undefined;
     LoginUserRequest.refineValues(this);
-  }
-  get username(): string | undefined {
-    return this._username;
-  }
-  set username(value: string | undefined) {
-    this._username = value;
-  }
-  get password(): string | undefined {
-    return this._password;
-  }
-  set password(value: string | undefined) {
-    this._password = value;
-  }
-  get device(): string | undefined {
-    return this._device;
-  }
-  set device(value: string | undefined) {
-    this._device = value;
   }
   get user(): User | undefined {
     return this._user;
@@ -299,9 +252,6 @@ export class LoginUserRequest implements GrpcMessage {
    */
   toObject(): LoginUserRequest.AsObject {
     return {
-      username: this.username,
-      password: this.password,
-      device: this.device,
       user: this.user ? this.user.toObject() : undefined
     };
   }
@@ -323,9 +273,6 @@ export class LoginUserRequest implements GrpcMessage {
     options?: ToProtobufJSONOptions
   ): LoginUserRequest.AsProtobufJSON {
     return {
-      username: this.username,
-      password: this.password,
-      device: this.device,
       user: this.user ? this.user.toProtobufJSON(options) : null
     };
   }
@@ -335,9 +282,6 @@ export module LoginUserRequest {
    * Standard JavaScript object representation for LoginUserRequest
    */
   export interface AsObject {
-    username?: string;
-    password?: string;
-    device?: string;
     user?: User.AsObject;
   }
 
@@ -345,9 +289,6 @@ export module LoginUserRequest {
    * Protobuf JSON representation for LoginUserRequest
    */
   export interface AsProtobufJSON {
-    username?: string;
-    password?: string;
-    device?: string;
     user?: User.AsProtobufJSON | null;
   }
 }

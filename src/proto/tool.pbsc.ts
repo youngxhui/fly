@@ -19,10 +19,7 @@ import {
 } from '@ngx-grpc/core';
 import { Observable } from 'rxjs';
 import * as thisProto from './tool.pb';
-import * as googleApi000 from './google/api/http.pb';
-import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
-import * as googleApi003 from './google/api/annotations.pb';
+import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
 import { GRPC_TOOL_SERVICE_CLIENT_SETTINGS } from './tool.pbconf';
 /**
  * Service client implementation for protos.ToolService
@@ -126,12 +123,12 @@ export class ToolServiceClient {
      *
      * @param requestMessage Request message
      * @param requestMetadata Request metadata
-     * @returns Observable<GrpcEvent<googleProtobuf002.Empty>>
+     * @returns Observable<GrpcEvent<googleProtobuf000.Empty>>
      */
     deleteTool: (
       requestData: thisProto.DeleteToolRequest,
       requestMetadata = new GrpcMetadata()
-    ): Observable<GrpcEvent<googleProtobuf002.Empty>> => {
+    ): Observable<GrpcEvent<googleProtobuf000.Empty>> => {
       return this.handler.handle({
         type: GrpcCallType.unary,
         client: this.client,
@@ -139,7 +136,7 @@ export class ToolServiceClient {
         requestData,
         requestMetadata,
         requestClass: thisProto.DeleteToolRequest,
-        responseClass: googleProtobuf002.Empty
+        responseClass: googleProtobuf000.Empty
       });
     }
   };
@@ -221,12 +218,12 @@ export class ToolServiceClient {
    *
    * @param requestMessage Request message
    * @param requestMetadata Request metadata
-   * @returns Observable<googleProtobuf002.Empty>
+   * @returns Observable<googleProtobuf000.Empty>
    */
   deleteTool(
     requestData: thisProto.DeleteToolRequest,
     requestMetadata = new GrpcMetadata()
-  ): Observable<googleProtobuf002.Empty> {
+  ): Observable<googleProtobuf000.Empty> {
     return this.$raw
       .deleteTool(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());

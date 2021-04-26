@@ -2,7 +2,7 @@
 
 <nz-alert nzType="warning" nzMessage="编号为 No.002 的刀具即将磨损至无法使用，请注意更换！" nzShowIcon
           style="margin-top: 2px;margin-bottom: 2px"></nz-alert>
-<button (click)="grpcTest()">test</button>
+
 <nz-table #basicTable [nzData]="tools">
     <thead>
     <tr>
@@ -27,8 +27,7 @@
             <nz-tag nzColor="error"><i nz-icon nzType="close-circle"></i><span>已经损坏</span></nz-tag>
         </td>
         <td>
-            <a>查看详情</a>
-
+            <a [routerLink]="'/detail/'+data.id">查看详情</a>
         </td>
 
     </tr>

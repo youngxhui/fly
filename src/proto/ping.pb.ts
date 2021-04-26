@@ -9,9 +9,7 @@ import {
   ToProtobufJSONOptions
 } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as googleApi000 from './google/api/http.pb';
-import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as googleApi002 from './google/api/annotations.pb';
+
 /**
  * Message implementation for protos.PingRequest
  */

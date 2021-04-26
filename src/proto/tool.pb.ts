@@ -9,10 +9,7 @@ import {
   ToProtobufJSONOptions
 } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
-import * as googleApi000 from './google/api/http.pb';
-import * as googleProtobuf001 from '@ngx-grpc/well-known-types';
-import * as googleProtobuf002 from '@ngx-grpc/well-known-types';
-import * as googleApi003 from './google/api/annotations.pb';
+import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
 export enum Status {
   Health = 0,
   Waring = 1,
