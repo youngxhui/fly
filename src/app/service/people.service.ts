@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PeopleServiceClient } from '../../proto/people.pbsc';
-import { ListPeoplesRequest, ListPeoplesResponse } from '../../proto/people.pb';
+import { CreatePeopleRequest, ListPeoplesRequest, ListPeoplesResponse, People } from '../../proto/people.pb';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,5 +21,9 @@ export class PeopleService {
         listRequestData.page = page;
         listRequestData.size = size;
         return this.client.listPeoples(listRequestData);
+    }
+
+    peopleCreate(people: CreatePeopleRequest): Observable<People> {
+        return this.client.createPeople(people);
     }
 }

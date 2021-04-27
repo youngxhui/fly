@@ -10,20 +10,19 @@ import {
 } from '@ngx-grpc/common';
 import { BinaryReader, BinaryWriter, ByteSource } from 'google-protobuf';
 import * as googleProtobuf000 from '@ngx-grpc/well-known-types';
-import * as protos001 from './role.pb';
 /**
- * Message implementation for protos.People
+ * Message implementation for protos.Machine
  */
-export class People implements GrpcMessage {
-  static id = 'protos.People';
+export class Machine implements GrpcMessage {
+  static id = 'protos.Machine';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new People();
-    People.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
+    const instance = new Machine();
+    Machine.deserializeBinaryFromReader(instance, new BinaryReader(bytes));
     return instance;
   }
 
@@ -31,11 +30,9 @@ export class People implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: People) {
+  static refineValues(_instance: Machine) {
     _instance.id = _instance.id || 0;
     _instance.name = _instance.name || '';
-    _instance.password = _instance.password || '';
-    _instance.role = _instance.role || undefined;
   }
 
   /**
@@ -43,7 +40,10 @@ export class People implements GrpcMessage {
    * @param _instance message instance
    * @param _reader binary reader instance
    */
-  static deserializeBinaryFromReader(_instance: People, _reader: BinaryReader) {
+  static deserializeBinaryFromReader(
+    _instance: Machine,
+    _reader: BinaryReader
+  ) {
     while (_reader.nextField()) {
       if (_reader.isEndGroup()) break;
 
@@ -54,22 +54,12 @@ export class People implements GrpcMessage {
         case 2:
           _instance.name = _reader.readString();
           break;
-        case 3:
-          _instance.password = _reader.readString();
-          break;
-        case 4:
-          _instance.role = new protos001.Role();
-          _reader.readMessage(
-            _instance.role,
-            protos001.Role.deserializeBinaryFromReader
-          );
-          break;
         default:
           _reader.skipField();
       }
     }
 
-    People.refineValues(_instance);
+    Machine.refineValues(_instance);
   }
 
   /**
@@ -77,41 +67,27 @@ export class People implements GrpcMessage {
    * @param _instance message instance
    * @param _writer binary writer instance
    */
-  static serializeBinaryToWriter(_instance: People, _writer: BinaryWriter) {
+  static serializeBinaryToWriter(_instance: Machine, _writer: BinaryWriter) {
     if (_instance.id) {
       _writer.writeInt32(1, _instance.id);
     }
     if (_instance.name) {
       _writer.writeString(2, _instance.name);
     }
-    if (_instance.password) {
-      _writer.writeString(3, _instance.password);
-    }
-    if (_instance.role) {
-      _writer.writeMessage(
-        4,
-        _instance.role as any,
-        protos001.Role.serializeBinaryToWriter
-      );
-    }
   }
 
   private _id?: number;
   private _name?: string;
-  private _password?: string;
-  private _role?: protos001.Role;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of People to deeply clone from
+   * @param _value initial values object or instance of Machine to deeply clone from
    */
-  constructor(_value?: RecursivePartial<People.AsObject>) {
+  constructor(_value?: RecursivePartial<Machine.AsObject>) {
     _value = _value || {};
     this.id = _value.id;
     this.name = _value.name;
-    this.password = _value.password;
-    this.role = _value.role ? new protos001.Role(_value.role) : undefined;
-    People.refineValues(this);
+    Machine.refineValues(this);
   }
   get id(): number | undefined {
     return this._id;
@@ -125,18 +101,6 @@ export class People implements GrpcMessage {
   set name(value: string | undefined) {
     this._name = value;
   }
-  get password(): string | undefined {
-    return this._password;
-  }
-  set password(value: string | undefined) {
-    this._password = value;
-  }
-  get role(): protos001.Role | undefined {
-    return this._role;
-  }
-  set role(value: protos001.Role | undefined) {
-    this._role = value;
-  }
 
   /**
    * Serialize message to binary data
@@ -144,19 +108,17 @@ export class People implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    People.serializeBinaryToWriter(this, writer);
+    Machine.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): People.AsObject {
+  toObject(): Machine.AsObject {
     return {
       id: this.id,
-      name: this.name,
-      password: this.password,
-      role: this.role ? this.role.toObject() : undefined
+      name: this.name
     };
   }
 
@@ -175,50 +137,44 @@ export class People implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): People.AsProtobufJSON {
+  ): Machine.AsProtobufJSON {
     return {
       id: this.id,
-      name: this.name,
-      password: this.password,
-      role: this.role ? this.role.toProtobufJSON(options) : null
+      name: this.name
     };
   }
 }
-export module People {
+export module Machine {
   /**
-   * Standard JavaScript object representation for People
+   * Standard JavaScript object representation for Machine
    */
   export interface AsObject {
     id?: number;
     name?: string;
-    password?: string;
-    role?: protos001.Role.AsObject;
   }
 
   /**
-   * Protobuf JSON representation for People
+   * Protobuf JSON representation for Machine
    */
   export interface AsProtobufJSON {
     id?: number;
     name?: string;
-    password?: string;
-    role?: protos001.Role.AsProtobufJSON | null;
   }
 }
 
 /**
- * Message implementation for protos.ListPeoplesRequest
+ * Message implementation for protos.ListMachinesRequest
  */
-export class ListPeoplesRequest implements GrpcMessage {
-  static id = 'protos.ListPeoplesRequest';
+export class ListMachinesRequest implements GrpcMessage {
+  static id = 'protos.ListMachinesRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new ListPeoplesRequest();
-    ListPeoplesRequest.deserializeBinaryFromReader(
+    const instance = new ListMachinesRequest();
+    ListMachinesRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -229,7 +185,7 @@ export class ListPeoplesRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: ListPeoplesRequest) {
+  static refineValues(_instance: ListMachinesRequest) {
     _instance.page = _instance.page || 0;
     _instance.size = _instance.size || 0;
   }
@@ -240,17 +196,17 @@ export class ListPeoplesRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: ListPeoplesRequest,
+    _instance: ListMachinesRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
       if (_reader.isEndGroup()) break;
 
       switch (_reader.getFieldNumber()) {
-        case 1:
+        case 2:
           _instance.page = _reader.readInt32();
           break;
-        case 2:
+        case 3:
           _instance.size = _reader.readInt32();
           break;
         default:
@@ -258,7 +214,7 @@ export class ListPeoplesRequest implements GrpcMessage {
       }
     }
 
-    ListPeoplesRequest.refineValues(_instance);
+    ListMachinesRequest.refineValues(_instance);
   }
 
   /**
@@ -267,14 +223,14 @@ export class ListPeoplesRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: ListPeoplesRequest,
+    _instance: ListMachinesRequest,
     _writer: BinaryWriter
   ) {
     if (_instance.page) {
-      _writer.writeInt32(1, _instance.page);
+      _writer.writeInt32(2, _instance.page);
     }
     if (_instance.size) {
-      _writer.writeInt32(2, _instance.size);
+      _writer.writeInt32(3, _instance.size);
     }
   }
 
@@ -283,13 +239,13 @@ export class ListPeoplesRequest implements GrpcMessage {
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of ListPeoplesRequest to deeply clone from
+   * @param _value initial values object or instance of ListMachinesRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<ListPeoplesRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<ListMachinesRequest.AsObject>) {
     _value = _value || {};
     this.page = _value.page;
     this.size = _value.size;
-    ListPeoplesRequest.refineValues(this);
+    ListMachinesRequest.refineValues(this);
   }
   get page(): number | undefined {
     return this._page;
@@ -310,14 +266,14 @@ export class ListPeoplesRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    ListPeoplesRequest.serializeBinaryToWriter(this, writer);
+    ListMachinesRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): ListPeoplesRequest.AsObject {
+  toObject(): ListMachinesRequest.AsObject {
     return {
       page: this.page,
       size: this.size
@@ -339,16 +295,16 @@ export class ListPeoplesRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): ListPeoplesRequest.AsProtobufJSON {
+  ): ListMachinesRequest.AsProtobufJSON {
     return {
       page: this.page,
       size: this.size
     };
   }
 }
-export module ListPeoplesRequest {
+export module ListMachinesRequest {
   /**
-   * Standard JavaScript object representation for ListPeoplesRequest
+   * Standard JavaScript object representation for ListMachinesRequest
    */
   export interface AsObject {
     page?: number;
@@ -356,7 +312,7 @@ export module ListPeoplesRequest {
   }
 
   /**
-   * Protobuf JSON representation for ListPeoplesRequest
+   * Protobuf JSON representation for ListMachinesRequest
    */
   export interface AsProtobufJSON {
     page?: number;
@@ -365,18 +321,18 @@ export module ListPeoplesRequest {
 }
 
 /**
- * Message implementation for protos.ListPeoplesResponse
+ * Message implementation for protos.ListMachinesResponse
  */
-export class ListPeoplesResponse implements GrpcMessage {
-  static id = 'protos.ListPeoplesResponse';
+export class ListMachinesResponse implements GrpcMessage {
+  static id = 'protos.ListMachinesResponse';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new ListPeoplesResponse();
-    ListPeoplesResponse.deserializeBinaryFromReader(
+    const instance = new ListMachinesResponse();
+    ListMachinesResponse.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -387,8 +343,8 @@ export class ListPeoplesResponse implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: ListPeoplesResponse) {
-    _instance.peoples = _instance.peoples || [];
+  static refineValues(_instance: ListMachinesResponse) {
+    _instance.machines = _instance.machines || [];
   }
 
   /**
@@ -397,7 +353,7 @@ export class ListPeoplesResponse implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: ListPeoplesResponse,
+    _instance: ListMachinesResponse,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -405,12 +361,12 @@ export class ListPeoplesResponse implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          const messageInitializer1 = new People();
+          const messageInitializer1 = new Machine();
           _reader.readMessage(
             messageInitializer1,
-            People.deserializeBinaryFromReader
+            Machine.deserializeBinaryFromReader
           );
-          (_instance.peoples = _instance.peoples || []).push(
+          (_instance.machines = _instance.machines || []).push(
             messageInitializer1
           );
           break;
@@ -419,7 +375,7 @@ export class ListPeoplesResponse implements GrpcMessage {
       }
     }
 
-    ListPeoplesResponse.refineValues(_instance);
+    ListMachinesResponse.refineValues(_instance);
   }
 
   /**
@@ -428,34 +384,34 @@ export class ListPeoplesResponse implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: ListPeoplesResponse,
+    _instance: ListMachinesResponse,
     _writer: BinaryWriter
   ) {
-    if (_instance.peoples && _instance.peoples.length) {
+    if (_instance.machines && _instance.machines.length) {
       _writer.writeRepeatedMessage(
         1,
-        _instance.peoples as any,
-        People.serializeBinaryToWriter
+        _instance.machines as any,
+        Machine.serializeBinaryToWriter
       );
     }
   }
 
-  private _peoples?: People[];
+  private _machines?: Machine[];
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of ListPeoplesResponse to deeply clone from
+   * @param _value initial values object or instance of ListMachinesResponse to deeply clone from
    */
-  constructor(_value?: RecursivePartial<ListPeoplesResponse.AsObject>) {
+  constructor(_value?: RecursivePartial<ListMachinesResponse.AsObject>) {
     _value = _value || {};
-    this.peoples = (_value.peoples || []).map(m => new People(m));
-    ListPeoplesResponse.refineValues(this);
+    this.machines = (_value.machines || []).map(m => new Machine(m));
+    ListMachinesResponse.refineValues(this);
   }
-  get peoples(): People[] | undefined {
-    return this._peoples;
+  get machines(): Machine[] | undefined {
+    return this._machines;
   }
-  set peoples(value: People[] | undefined) {
-    this._peoples = value;
+  set machines(value: Machine[] | undefined) {
+    this._machines = value;
   }
 
   /**
@@ -464,16 +420,16 @@ export class ListPeoplesResponse implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    ListPeoplesResponse.serializeBinaryToWriter(this, writer);
+    ListMachinesResponse.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): ListPeoplesResponse.AsObject {
+  toObject(): ListMachinesResponse.AsObject {
     return {
-      peoples: (this.peoples || []).map(m => m.toObject())
+      machines: (this.machines || []).map(m => m.toObject())
     };
   }
 
@@ -492,41 +448,41 @@ export class ListPeoplesResponse implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): ListPeoplesResponse.AsProtobufJSON {
+  ): ListMachinesResponse.AsProtobufJSON {
     return {
-      peoples: (this.peoples || []).map(m => m.toProtobufJSON(options))
+      machines: (this.machines || []).map(m => m.toProtobufJSON(options))
     };
   }
 }
-export module ListPeoplesResponse {
+export module ListMachinesResponse {
   /**
-   * Standard JavaScript object representation for ListPeoplesResponse
+   * Standard JavaScript object representation for ListMachinesResponse
    */
   export interface AsObject {
-    peoples?: People.AsObject[];
+    machines?: Machine.AsObject[];
   }
 
   /**
-   * Protobuf JSON representation for ListPeoplesResponse
+   * Protobuf JSON representation for ListMachinesResponse
    */
   export interface AsProtobufJSON {
-    peoples?: People.AsProtobufJSON[] | null;
+    machines?: Machine.AsProtobufJSON[] | null;
   }
 }
 
 /**
- * Message implementation for protos.GetPeopleRequest
+ * Message implementation for protos.GetMachineRequest
  */
-export class GetPeopleRequest implements GrpcMessage {
-  static id = 'protos.GetPeopleRequest';
+export class GetMachineRequest implements GrpcMessage {
+  static id = 'protos.GetMachineRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new GetPeopleRequest();
-    GetPeopleRequest.deserializeBinaryFromReader(
+    const instance = new GetMachineRequest();
+    GetMachineRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -537,7 +493,7 @@ export class GetPeopleRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: GetPeopleRequest) {
+  static refineValues(_instance: GetMachineRequest) {
     _instance.id = _instance.id || 0;
   }
 
@@ -547,7 +503,7 @@ export class GetPeopleRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: GetPeopleRequest,
+    _instance: GetMachineRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -562,7 +518,7 @@ export class GetPeopleRequest implements GrpcMessage {
       }
     }
 
-    GetPeopleRequest.refineValues(_instance);
+    GetMachineRequest.refineValues(_instance);
   }
 
   /**
@@ -571,7 +527,7 @@ export class GetPeopleRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: GetPeopleRequest,
+    _instance: GetMachineRequest,
     _writer: BinaryWriter
   ) {
     if (_instance.id) {
@@ -583,12 +539,12 @@ export class GetPeopleRequest implements GrpcMessage {
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of GetPeopleRequest to deeply clone from
+   * @param _value initial values object or instance of GetMachineRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<GetPeopleRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<GetMachineRequest.AsObject>) {
     _value = _value || {};
     this.id = _value.id;
-    GetPeopleRequest.refineValues(this);
+    GetMachineRequest.refineValues(this);
   }
   get id(): number | undefined {
     return this._id;
@@ -603,14 +559,14 @@ export class GetPeopleRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    GetPeopleRequest.serializeBinaryToWriter(this, writer);
+    GetMachineRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): GetPeopleRequest.AsObject {
+  toObject(): GetMachineRequest.AsObject {
     return {
       id: this.id
     };
@@ -631,22 +587,22 @@ export class GetPeopleRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): GetPeopleRequest.AsProtobufJSON {
+  ): GetMachineRequest.AsProtobufJSON {
     return {
       id: this.id
     };
   }
 }
-export module GetPeopleRequest {
+export module GetMachineRequest {
   /**
-   * Standard JavaScript object representation for GetPeopleRequest
+   * Standard JavaScript object representation for GetMachineRequest
    */
   export interface AsObject {
     id?: number;
   }
 
   /**
-   * Protobuf JSON representation for GetPeopleRequest
+   * Protobuf JSON representation for GetMachineRequest
    */
   export interface AsProtobufJSON {
     id?: number;
@@ -654,18 +610,18 @@ export module GetPeopleRequest {
 }
 
 /**
- * Message implementation for protos.CreatePeopleRequest
+ * Message implementation for protos.CreateMachineRequest
  */
-export class CreatePeopleRequest implements GrpcMessage {
-  static id = 'protos.CreatePeopleRequest';
+export class CreateMachineRequest implements GrpcMessage {
+  static id = 'protos.CreateMachineRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new CreatePeopleRequest();
-    CreatePeopleRequest.deserializeBinaryFromReader(
+    const instance = new CreateMachineRequest();
+    CreateMachineRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -676,8 +632,8 @@ export class CreatePeopleRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: CreatePeopleRequest) {
-    _instance.people = _instance.people || undefined;
+  static refineValues(_instance: CreateMachineRequest) {
+    _instance.machine = _instance.machine || undefined;
   }
 
   /**
@@ -686,18 +642,18 @@ export class CreatePeopleRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: CreatePeopleRequest,
+    _instance: CreateMachineRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
       if (_reader.isEndGroup()) break;
 
       switch (_reader.getFieldNumber()) {
-        case 1:
-          _instance.people = new People();
+        case 3:
+          _instance.machine = new Machine();
           _reader.readMessage(
-            _instance.people,
-            People.deserializeBinaryFromReader
+            _instance.machine,
+            Machine.deserializeBinaryFromReader
           );
           break;
         default:
@@ -705,7 +661,7 @@ export class CreatePeopleRequest implements GrpcMessage {
       }
     }
 
-    CreatePeopleRequest.refineValues(_instance);
+    CreateMachineRequest.refineValues(_instance);
   }
 
   /**
@@ -714,34 +670,34 @@ export class CreatePeopleRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: CreatePeopleRequest,
+    _instance: CreateMachineRequest,
     _writer: BinaryWriter
   ) {
-    if (_instance.people) {
+    if (_instance.machine) {
       _writer.writeMessage(
-        1,
-        _instance.people as any,
-        People.serializeBinaryToWriter
+        3,
+        _instance.machine as any,
+        Machine.serializeBinaryToWriter
       );
     }
   }
 
-  private _people?: People;
+  private _machine?: Machine;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of CreatePeopleRequest to deeply clone from
+   * @param _value initial values object or instance of CreateMachineRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<CreatePeopleRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<CreateMachineRequest.AsObject>) {
     _value = _value || {};
-    this.people = _value.people ? new People(_value.people) : undefined;
-    CreatePeopleRequest.refineValues(this);
+    this.machine = _value.machine ? new Machine(_value.machine) : undefined;
+    CreateMachineRequest.refineValues(this);
   }
-  get people(): People | undefined {
-    return this._people;
+  get machine(): Machine | undefined {
+    return this._machine;
   }
-  set people(value: People | undefined) {
-    this._people = value;
+  set machine(value: Machine | undefined) {
+    this._machine = value;
   }
 
   /**
@@ -750,16 +706,16 @@ export class CreatePeopleRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    CreatePeopleRequest.serializeBinaryToWriter(this, writer);
+    CreateMachineRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): CreatePeopleRequest.AsObject {
+  toObject(): CreateMachineRequest.AsObject {
     return {
-      people: this.people ? this.people.toObject() : undefined
+      machine: this.machine ? this.machine.toObject() : undefined
     };
   }
 
@@ -778,41 +734,41 @@ export class CreatePeopleRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): CreatePeopleRequest.AsProtobufJSON {
+  ): CreateMachineRequest.AsProtobufJSON {
     return {
-      people: this.people ? this.people.toProtobufJSON(options) : null
+      machine: this.machine ? this.machine.toProtobufJSON(options) : null
     };
   }
 }
-export module CreatePeopleRequest {
+export module CreateMachineRequest {
   /**
-   * Standard JavaScript object representation for CreatePeopleRequest
+   * Standard JavaScript object representation for CreateMachineRequest
    */
   export interface AsObject {
-    people?: People.AsObject;
+    machine?: Machine.AsObject;
   }
 
   /**
-   * Protobuf JSON representation for CreatePeopleRequest
+   * Protobuf JSON representation for CreateMachineRequest
    */
   export interface AsProtobufJSON {
-    people?: People.AsProtobufJSON | null;
+    machine?: Machine.AsProtobufJSON | null;
   }
 }
 
 /**
- * Message implementation for protos.UpdatePeopleRequest
+ * Message implementation for protos.UpdateMachineRequest
  */
-export class UpdatePeopleRequest implements GrpcMessage {
-  static id = 'protos.UpdatePeopleRequest';
+export class UpdateMachineRequest implements GrpcMessage {
+  static id = 'protos.UpdateMachineRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new UpdatePeopleRequest();
-    UpdatePeopleRequest.deserializeBinaryFromReader(
+    const instance = new UpdateMachineRequest();
+    UpdateMachineRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -823,8 +779,8 @@ export class UpdatePeopleRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: UpdatePeopleRequest) {
-    _instance.people = _instance.people || undefined;
+  static refineValues(_instance: UpdateMachineRequest) {
+    _instance.machine = _instance.machine || undefined;
   }
 
   /**
@@ -833,7 +789,7 @@ export class UpdatePeopleRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: UpdatePeopleRequest,
+    _instance: UpdateMachineRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -841,10 +797,10 @@ export class UpdatePeopleRequest implements GrpcMessage {
 
       switch (_reader.getFieldNumber()) {
         case 1:
-          _instance.people = new People();
+          _instance.machine = new Machine();
           _reader.readMessage(
-            _instance.people,
-            People.deserializeBinaryFromReader
+            _instance.machine,
+            Machine.deserializeBinaryFromReader
           );
           break;
         default:
@@ -852,7 +808,7 @@ export class UpdatePeopleRequest implements GrpcMessage {
       }
     }
 
-    UpdatePeopleRequest.refineValues(_instance);
+    UpdateMachineRequest.refineValues(_instance);
   }
 
   /**
@@ -861,34 +817,34 @@ export class UpdatePeopleRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: UpdatePeopleRequest,
+    _instance: UpdateMachineRequest,
     _writer: BinaryWriter
   ) {
-    if (_instance.people) {
+    if (_instance.machine) {
       _writer.writeMessage(
         1,
-        _instance.people as any,
-        People.serializeBinaryToWriter
+        _instance.machine as any,
+        Machine.serializeBinaryToWriter
       );
     }
   }
 
-  private _people?: People;
+  private _machine?: Machine;
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of UpdatePeopleRequest to deeply clone from
+   * @param _value initial values object or instance of UpdateMachineRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<UpdatePeopleRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<UpdateMachineRequest.AsObject>) {
     _value = _value || {};
-    this.people = _value.people ? new People(_value.people) : undefined;
-    UpdatePeopleRequest.refineValues(this);
+    this.machine = _value.machine ? new Machine(_value.machine) : undefined;
+    UpdateMachineRequest.refineValues(this);
   }
-  get people(): People | undefined {
-    return this._people;
+  get machine(): Machine | undefined {
+    return this._machine;
   }
-  set people(value: People | undefined) {
-    this._people = value;
+  set machine(value: Machine | undefined) {
+    this._machine = value;
   }
 
   /**
@@ -897,16 +853,16 @@ export class UpdatePeopleRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    UpdatePeopleRequest.serializeBinaryToWriter(this, writer);
+    UpdateMachineRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): UpdatePeopleRequest.AsObject {
+  toObject(): UpdateMachineRequest.AsObject {
     return {
-      people: this.people ? this.people.toObject() : undefined
+      machine: this.machine ? this.machine.toObject() : undefined
     };
   }
 
@@ -925,41 +881,41 @@ export class UpdatePeopleRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): UpdatePeopleRequest.AsProtobufJSON {
+  ): UpdateMachineRequest.AsProtobufJSON {
     return {
-      people: this.people ? this.people.toProtobufJSON(options) : null
+      machine: this.machine ? this.machine.toProtobufJSON(options) : null
     };
   }
 }
-export module UpdatePeopleRequest {
+export module UpdateMachineRequest {
   /**
-   * Standard JavaScript object representation for UpdatePeopleRequest
+   * Standard JavaScript object representation for UpdateMachineRequest
    */
   export interface AsObject {
-    people?: People.AsObject;
+    machine?: Machine.AsObject;
   }
 
   /**
-   * Protobuf JSON representation for UpdatePeopleRequest
+   * Protobuf JSON representation for UpdateMachineRequest
    */
   export interface AsProtobufJSON {
-    people?: People.AsProtobufJSON | null;
+    machine?: Machine.AsProtobufJSON | null;
   }
 }
 
 /**
- * Message implementation for protos.DeletePeopleRequest
+ * Message implementation for protos.DeleteMachineRequest
  */
-export class DeletePeopleRequest implements GrpcMessage {
-  static id = 'protos.DeletePeopleRequest';
+export class DeleteMachineRequest implements GrpcMessage {
+  static id = 'protos.DeleteMachineRequest';
 
   /**
    * Deserialize binary data to message
    * @param instance message instance
    */
   static deserializeBinary(bytes: ByteSource) {
-    const instance = new DeletePeopleRequest();
-    DeletePeopleRequest.deserializeBinaryFromReader(
+    const instance = new DeleteMachineRequest();
+    DeleteMachineRequest.deserializeBinaryFromReader(
       instance,
       new BinaryReader(bytes)
     );
@@ -970,7 +926,7 @@ export class DeletePeopleRequest implements GrpcMessage {
    * Check all the properties and set default protobuf values if necessary
    * @param _instance message instance
    */
-  static refineValues(_instance: DeletePeopleRequest) {
+  static refineValues(_instance: DeleteMachineRequest) {
     _instance.id = _instance.id || 0;
   }
 
@@ -980,7 +936,7 @@ export class DeletePeopleRequest implements GrpcMessage {
    * @param _reader binary reader instance
    */
   static deserializeBinaryFromReader(
-    _instance: DeletePeopleRequest,
+    _instance: DeleteMachineRequest,
     _reader: BinaryReader
   ) {
     while (_reader.nextField()) {
@@ -995,7 +951,7 @@ export class DeletePeopleRequest implements GrpcMessage {
       }
     }
 
-    DeletePeopleRequest.refineValues(_instance);
+    DeleteMachineRequest.refineValues(_instance);
   }
 
   /**
@@ -1004,7 +960,7 @@ export class DeletePeopleRequest implements GrpcMessage {
    * @param _writer binary writer instance
    */
   static serializeBinaryToWriter(
-    _instance: DeletePeopleRequest,
+    _instance: DeleteMachineRequest,
     _writer: BinaryWriter
   ) {
     if (_instance.id) {
@@ -1016,12 +972,12 @@ export class DeletePeopleRequest implements GrpcMessage {
 
   /**
    * Message constructor. Initializes the properties and applies default Protobuf values if necessary
-   * @param _value initial values object or instance of DeletePeopleRequest to deeply clone from
+   * @param _value initial values object or instance of DeleteMachineRequest to deeply clone from
    */
-  constructor(_value?: RecursivePartial<DeletePeopleRequest.AsObject>) {
+  constructor(_value?: RecursivePartial<DeleteMachineRequest.AsObject>) {
     _value = _value || {};
     this.id = _value.id;
-    DeletePeopleRequest.refineValues(this);
+    DeleteMachineRequest.refineValues(this);
   }
   get id(): number | undefined {
     return this._id;
@@ -1036,14 +992,14 @@ export class DeletePeopleRequest implements GrpcMessage {
    */
   serializeBinary() {
     const writer = new BinaryWriter();
-    DeletePeopleRequest.serializeBinaryToWriter(this, writer);
+    DeleteMachineRequest.serializeBinaryToWriter(this, writer);
     return writer.getResultBuffer();
   }
 
   /**
    * Cast message to standard JavaScript object (all non-primitive values are deeply cloned)
    */
-  toObject(): DeletePeopleRequest.AsObject {
+  toObject(): DeleteMachineRequest.AsObject {
     return {
       id: this.id
     };
@@ -1064,22 +1020,22 @@ export class DeletePeopleRequest implements GrpcMessage {
   toProtobufJSON(
     // @ts-ignore
     options?: ToProtobufJSONOptions
-  ): DeletePeopleRequest.AsProtobufJSON {
+  ): DeleteMachineRequest.AsProtobufJSON {
     return {
       id: this.id
     };
   }
 }
-export module DeletePeopleRequest {
+export module DeleteMachineRequest {
   /**
-   * Standard JavaScript object representation for DeletePeopleRequest
+   * Standard JavaScript object representation for DeleteMachineRequest
    */
   export interface AsObject {
     id?: number;
   }
 
   /**
-   * Protobuf JSON representation for DeletePeopleRequest
+   * Protobuf JSON representation for DeleteMachineRequest
    */
   export interface AsProtobufJSON {
     id?: number;
