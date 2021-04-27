@@ -3,6 +3,8 @@ import { EChartsOption, getInstanceByDom } from 'echarts';
 import { WebsocketService } from '../../service/websocket.service';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Wear } from '../../../proto/wear.pb';
 
 @Component({
     selector: 'app-tool-detail',
@@ -81,7 +83,7 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
         ]
     };
     ws: WebSocketSubject<any>;
-    date = new Date();
+
     toolId: number;
 
     constructor(private websocketService: WebsocketService, private route: ActivatedRoute) {
@@ -90,13 +92,22 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.toolId = this.route.snapshot.params.id;
         console.log(this.toolId);
-        this.ws = webSocket('ws://localhost:8080');
-        this.ws.subscribe((res: string) => {
+        // @ts-ignore
+        this.ws = webSocket({
+            url: 'ws://localhost:8080',
+            binaryType: 'arraybuffer',
+            deserializer: (message: MessageEvent) => message.data,
+            serializer: (message: Wear) => message.serializeBinary()
+        });
+        this.ws.pipe(map(
+            (res: ArrayBuffer) => {
+                return Wear.deserializeBinary(res);
+            }
+        )).subscribe((res: Wear) => {
             this.wearTool.shift();
             this.wearTime.shift();
-            this.wearTool.push(Number(res));
-            this.wearTime.push(this.date.getHours().toLocaleString() + ':' + this.date.getMinutes().toLocaleString() + ':'
-                + this.date.getSeconds());
+            this.wearTool.push(Number(res.loss));
+            this.wearTime.push(res.date);
             this.chartOption.series[0].data = this.wearTool;
             // @ts-ignore
             this.chartOption.xAxis.data = this.wearTime;
@@ -106,20 +117,16 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
         }, () => {
             console.log('complete');
         });
-
-        this.ws.next(this.toolId);
+        const wear = new Wear();
+        wear.id = this.toolId;
+        this.ws.next(wear);
     }
 
     ngOnDestroy(): void {
         console.log('ngOnDestory');
         this.ws.unsubscribe();
         this.ws.complete();
-
-        // this.websocketService.closeWebSocket();
     }
 
-    sendMessage(): void {
-        // this.websocketService.sendMessage('1');
-    }
 
 }

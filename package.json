@@ -26,6 +26,7 @@
     "@ngx-grpc/core": "^2.0.4",
     "@ngx-grpc/grpc-web-client": "^2.0.4",
     "@ngx-grpc/well-known-types": "^2.0.4",
+    "@types/protobufjs": "^6.0.0",
     "echarts": "^5.0.2",
     "google-protobuf": "^3.15.8",
     "grpc": "^1.24.6",
